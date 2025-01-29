@@ -25,12 +25,26 @@
 
   <hr>
 
+  <p
+    v-if="afficheErreur"
+    class="error"
+  >
+    Vous devez saisire qqch !!!
+  </p>
+  <input
+    v-model="nouveauJeu"
+    type="text"
+  >
+  <v-btn @click="ajouteJeu">
+    Ajouter
+  </v-btn>
+
   <ul>
     <li
-      v-for="leJeu in jeux"
-      :key="leJeu"
+      v-for="(leJeu, index) in jeux"
+      :key="index"
     >
-      {{ leJeu }}
+      {{ index }} - {{ leJeu }}
     </li>
   </ul>
 </template>
@@ -39,7 +53,13 @@
 // Importation de la fonction ref
 import { ref } from 'vue'
 
-let count = ref(0)
+// Variable pour le compteur
+const count = ref(0)
+// Variable pour le nouveau jeu
+const nouveauJeu = ref('')
+// Variable pour l'erreur
+const afficheErreur = ref(false)
+// Tableau de jeux
 const jeux = ref([
   'Monopoly',
   'La Bonne Paye',
@@ -54,19 +74,31 @@ function increment () {
 // Fonction qui décrémente count
 const decrement = () => count.value--
 
+// Fonction qui ajouter le nouveau jeu
+function ajouteJeu () {
+  if(nouveauJeu.value === '') {
+    afficheErreur.value = true
+    return
+  }
+
+  afficheErreur.value = false
+  jeux.value.push(nouveauJeu.value)
+}
 </script>
 
-<style>
+<style scoped lang="sass">
   /* Titre 1 */
-  h1 {
-    color: yellow;
-  }
+  h1
+    color: yellow
 
-  .error {
-    color: red;
-  }
+  .error
+    color: darken(red, 20%)
 
-  .valid {
-    color: green;
-  }
+  .valid
+    color: green
+
+  input
+    background-color: aliceblue
+    color: black
+    padding: 4px 2px
 </style>

@@ -11,8 +11,8 @@
   let nom = ref("Steve")
 </script>
 
-<style>
-  h1 {
-    color: blue;
-  }
+<style scoped>
+* {
+  border: 2px solid red;
+}
 </style>

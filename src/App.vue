@@ -76,12 +76,16 @@ const decrement = () => count.value--
 
 // Fonction qui ajouter le nouveau jeu
 function ajouteJeu () {
+  // Si le champ est vide
   if(nouveauJeu.value === '') {
+    // Afficher l'erreur
     afficheErreur.value = true
+    // Sortir de la fonction
     return
   }
-
+  // Cacher l'erreur
   afficheErreur.value = false
+  // Ajouter le jeu au tableau
   jeux.value.push(nouveauJeu.value)
 }
 </script>
